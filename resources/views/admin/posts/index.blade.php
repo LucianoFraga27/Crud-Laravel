@@ -3,6 +3,12 @@
 <hr>
 <h1>Posts</h1>
 
+@if(session('message'))
+<p>{{session('message')}}</p>
+@endif
+
 @foreach ($posts as $post)
-<p>{{ $post -> title}}</p>
+<p>{{ $post -> title}}
+<a href="{{route('posts.show',$post->id)}}">Ver detalhes</a>
+</p>
 @endforeach
