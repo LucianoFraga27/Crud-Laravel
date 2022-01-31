@@ -8,7 +8,7 @@
 </ul>
 @endif
 
-<form action="" method="POST">
+<form action="{{ route('posts.store')}}" method="POST">
 @csrf
 <!--Em todo formulario deve por @csrf-->
 <input type="text" name='title' id='title' placeholder='Título' value="{{old('title')}}">
