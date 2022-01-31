@@ -11,8 +11,9 @@ class PostController extends Controller
 {
     
     public function index(){
-        
-        $posts = Post::get(); //referencia o model posts
+        //orderby -> deixar os posts em ordem orderBy('id','ASC')
+        //latest() -> mais antigo pro mais novo
+        $posts = Post::latest()->paginate(1); //referencia o model posts
 
         return view('admin.posts.index', [
             'posts' => $posts
@@ -20,7 +21,7 @@ class PostController extends Controller
     }
 
     public function create(){
-        return view()->route('posts.create');
+        return view('admin.posts.create');
     }
 
     public function store(StoreUpdatePost $request){
@@ -80,4 +81,16 @@ class PostController extends Controller
         ->with('message','Post deletado com sucesso');
     }
     }
+
+    public function search(Request $request){
+        
+        $filters = $request->except('_token');
+        //procura pelo nome do post, igual , inicio ou fim % palavra pesquisada %
+        $posts = Post::where('title', 'LIKE',"%{$request->search}%" )
+                    ->orWhere('content', '=', $request->search)
+                    ->paginate(1);
+
+        return view('admin.posts.index',compact('posts','filters'));
+
+    } 
 }

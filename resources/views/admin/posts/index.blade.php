@@ -2,6 +2,12 @@
 <a href="{{route('posts.create')}}">Criar novo post</a>
 <hr>
 <h1>Posts</h1>
+<!-- Search -->
+<form action="{{route('posts.search')}}" method="post">
+    @csrf
+    <input type="text" name="search" id="seach" placeholder="Pesquisar">
+    <button type="submit">Enviar</button>
+</form>
 
 @if(session('message'))
 <p>{{session('message')}}</p>
@@ -13,3 +19,10 @@
 <a href="{{route('posts.edit',$post->id)}}">Editar</a>
 </p>
 @endforeach
+
+<hr>
+@if(isset($filters))
+    {{$posts->appends($filters)->links()}}
+@else
+    {{$posts->links()}}
+@endif
