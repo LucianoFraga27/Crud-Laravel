@@ -25,7 +25,8 @@ class StoreUpdatePost extends FormRequest
     {
         return [
             'title'=>'required|min:3|max:160', // obrigatorio | minimo caracteres | maximo caracteres
-            'content' => ['required','min:5','max:1000'], //dois tipos de deixar claro as validaçoes
+            'content' => ['nullable','min:5','max:1000'],//dois tipos de deixar claro as validaçoes
+            'image' => ['required','image',],
         ];
     }
 }
