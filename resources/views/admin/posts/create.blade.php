@@ -3,11 +3,12 @@
 @section('content')
 
 
-<h1>Novo post: <br></h1>
 
+<div class="w-11/12 p-12 bg-white sm:w-8/12 1g:w-5/12 mx-auto">
 <form action="{{ route('posts.store')}}" method="POST" enctype="multipart/form-data">
 
 @include('admin.posts.partials.form')
 
 </form>
+</div>
 @endsection
