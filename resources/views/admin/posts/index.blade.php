@@ -1,5 +1,8 @@
+@extends('admin.layouts.app')
+
+@section('content')
 <!--Bizu : por como route('nomearquivo') para que nao exista conflito caso um dia queira mudar o nome da rota-->
-<a href="{{route('posts.create')}}">Criar novo post</a>
+
 <hr>
 <h1>Posts</h1>
 <!-- Search -->
@@ -26,3 +29,5 @@
 @else
     {{$posts->links()}}
 @endif
+
+@endsection('content')
