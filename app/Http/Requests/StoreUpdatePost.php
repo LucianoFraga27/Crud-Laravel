@@ -23,10 +23,18 @@ class StoreUpdatePost extends FormRequest
      */
     public function rules()
     {
-        return [
-            'title'=>'required|min:3|max:160', // obrigatorio | minimo caracteres | maximo caracteres
+        $id = $this->segment(2);
+        
+        $regras = [
+            'title'=>"required|min:3|max:160|unique:posts,title,{$id},id", // obrigatorio | minimo caracteres | maximo caracteres
             'content' => ['nullable','min:5','max:1000'],//dois tipos de deixar claro as validaçoes
             'image' => ['required','image',],
         ];
+
+        if($this->method() == 'PUT') {
+                $regras ['image'] = ['nullable','image'];
+        }
+
+        return $regras;
     }
 }
